@@ -31,12 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Produto.cs" />
+    <Compile Include="Interfaces\IRepositories\IClienteRepository.cs" />
+    <Compile Include="Interfaces\IRepositories\IProdutoRepository.cs" />
+    <Compile Include="Interfaces\IRepositories\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\IServices\IClienteService.cs" />
+    <Compile Include="Interfaces\IServices\IProdutoService.cs" />
+    <Compile Include="Interfaces\IServices\IServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\ProdutoService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
