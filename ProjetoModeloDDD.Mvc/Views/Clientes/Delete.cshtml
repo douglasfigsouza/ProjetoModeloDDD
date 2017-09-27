@@ -1,0 +1,56 @@
+﻿@model ProjetoModeloDDD.Mvc.ViewModels.ClienteViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ClienteViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sobrenomeCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sobrenomeCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ativoCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ativoCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailCli)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

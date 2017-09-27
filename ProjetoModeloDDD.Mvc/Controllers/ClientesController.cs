@@ -11,22 +11,29 @@ namespace ProjetoModeloDDD.Mvc.Controllers
     public class ClientesController : Controller
     {
         private readonly IClienteAppService _clienteApp;
-        public ClientesController(IClienteAppService IClienteApp)
+        public ClientesController(IClienteAppService clienteApp)
         {
-            this._clienteApp = IClienteApp;
+            _clienteApp = clienteApp;
         }
         // GET: Clientes
         public ActionResult Index()
         {
             //o metodo get all retorna uma lista de clientes do tipo model, entao faz-se a conversão para view model
-            var clienteViewModel = Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteRep.GetAll());
+            var clienteViewModel = Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteApp.GetAll());
             return View(clienteViewModel);
         }
-
+        public ActionResult Especiais()
+        {
+            //o metodo get all retorna uma lista de clientes do tipo model, entao faz-se a conversão para view model
+            var clienteViewModel = Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteApp.obterClientesEspeciais());
+            return View(clienteViewModel);
+        }
         // GET: Clientes/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var cliente = _clienteApp.GetById(id);
+            var clienteViewModel = Mapper.Map<Cliente, ClienteViewModel>(cliente);
+            return View(clienteViewModel);
         }
 
         // GET: Clientes/Create
@@ -43,7 +50,7 @@ namespace ProjetoModeloDDD.Mvc.Controllers
             if (ModelState.IsValid)
             {
                 var clienteDomain = Mapper.Map<ClienteViewModel, Cliente>(cliente);
-                _clienteRep.Add(clienteDomain);
+                _clienteApp.Add(clienteDomain);
                 return RedirectToAction("Index");
             }
             else {
@@ -54,20 +61,23 @@ namespace ProjetoModeloDDD.Mvc.Controllers
         // GET: Clientes/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var cliente = _clienteApp.GetById(id);
+            var clienteViewModel = Mapper.Map<Cliente, ClienteViewModel>(cliente);
+            return View(clienteViewModel);
         }
 
         // POST: Clientes/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ClienteViewModel clienteViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var clienteDomain = Mapper.Map<ClienteViewModel, Cliente>(clienteViewModel);
+                _clienteApp.Update(clienteDomain);
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
                 return View();
             }
@@ -76,23 +86,20 @@ namespace ProjetoModeloDDD.Mvc.Controllers
         // GET: Clientes/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var cliente = _clienteApp.GetById(id);
+            var clienteViewModel = Mapper.Map<Cliente, ClienteViewModel>(cliente);
+
+            return View(clienteViewModel);
         }
 
         // POST: Clientes/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, FormCollection f)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var cliente = _clienteApp.GetById(id);
+            _clienteApp.Remove(cliente);
+            return RedirectToAction("Index");
         }
     }
 }

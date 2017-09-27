@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoModeloDDD.Application.Interface
 {
-    interface IAppServiceBase<TEntity> where TEntity:class
+    public interface IAppServiceBase<TEntity> where TEntity:class
     {
         void Add(TEntity obj);
         TEntity GetById(int id);

@@ -1,0 +1,50 @@
+﻿@model ProjetoModeloDDD.Mvc.ViewModels.ClienteViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ClienteViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sobrenomeCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sobrenomeCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ativoCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ativoCli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailCli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailCli)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.clienteId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
