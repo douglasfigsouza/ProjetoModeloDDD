@@ -12,7 +12,7 @@ namespace ProjetoModeloDDD.Infra.Data.Repositories
     {
         public IEnumerable<Produto> buscaPorNome(string nome)
         {
-            return Db.Produtos.Where(p => p.descProd == nome);
+            return null; //Db.Produtos.Where(p => p.descProd == nome);
         }
     }
 }

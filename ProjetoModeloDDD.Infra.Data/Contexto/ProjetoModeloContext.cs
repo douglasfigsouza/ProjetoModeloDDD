@@ -10,7 +10,7 @@ namespace ProjetoModeloDDD.Infra.Data.Contexto
 {
     public class ProjetoModeloContext:DbContext
     {
-        public ProjetoModeloContext()
+      /*  public ProjetoModeloContext()
             :base("ProjetoModeloDDD")
         {
 
@@ -56,6 +56,6 @@ namespace ProjetoModeloDDD.Infra.Data.Contexto
                     entry.Property("dataCadastro").IsModified = false;
             }
             return base.SaveChanges();
-        }
+        }*/
     }
 }

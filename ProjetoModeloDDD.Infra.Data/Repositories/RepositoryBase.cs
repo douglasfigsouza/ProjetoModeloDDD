@@ -4,6 +4,8 @@ using ProjetoModeloDDD.Infra.Data.Contexto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjetoModeloDDD.Domain.Entities;
+using ProjetoModeloDDD.Domain.Services;
 
 namespace ProjetoModeloDDD.Infra.Data.Repositories
 {
@@ -11,15 +13,40 @@ namespace ProjetoModeloDDD.Infra.Data.Repositories
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
         protected ProjetoModeloContext Db = new ProjetoModeloContext();
+        Conexao conn = new Conexao();
+        private Cliente cliente;
 
+        public RepositoryBase()
+        {
+            cliente = new Cliente();
+        }
+
+        private enum Procedures
+        {
+            PBSP_INSCLIENTE
+        }
         public void Add(TEntity obj)
         {
-            Db.Set<TEntity>().Add(obj);
-            Db.SaveChanges();
+            cliente.nomeCli = "Douglas";
+            cliente.sobrenomeCli = "Mata";
+            cliente.emailCli = "douglasfigsouza@gmail.com";
+            cliente.ativoCli = true;
+            
+            conn.ExecuteProcedure(Procedures.PBSP_INSCLIENTE);
+            conn.AddParameter("@nomeCli",cliente.nomeCli);
+            conn.AddParameter("@sobrenomeCli", cliente.sobrenomeCli);
+            conn.AddParameter("@emailCli", cliente.emailCli);
+            conn.AddParameter("@ativoCli", cliente.ativoCli);
+
+            conn.ExecuteNonQuery();
+
+            //Db.Set<TEntity>().Add(obj);
+            //Db.SaveChanges();
         }
         public IEnumerable<TEntity> GetAll()
         {
-            return Db.Set<TEntity>().ToList();
+            return null;// Db.Set<TEntity>().ToList();
+
         }
 
         public TEntity GetById(int id)
